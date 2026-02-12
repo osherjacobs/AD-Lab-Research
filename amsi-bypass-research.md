@@ -265,7 +265,7 @@ $rs.SessionStateProxy.SetVariable('ExecutionContext', $null)
 ## Key Findings
 
 ### What Works (with caveats)
-- **Nothing reliably bypasses AMSI on modern Windows 11 Enterprise with updated Defender**
+- **No publicly documented techniques tested here successfully bypassed AMSI under this configuration.**
 - Sophisticated multi-stage obfuscation + process hollowing may work temporarily
 - Custom C# tooling with syscall-level evasion shows more promise than PowerShell-based bypasses
 
