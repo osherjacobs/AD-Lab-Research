@@ -1,11 +1,13 @@
 # ADCSync - Fixed Version
 
 ## Attribution
-
 **Original Author:** JPG0mez  
-**Original Repository:** https://github.com/JPG0mez/ADCSync  
+Original Repository: https://github.com/JPG0mez/ADCSync  
+All credit for the original tool design belongs to the author.
+This version only corrects implementation bugs discovered during lab testing.
 **Bug Fixes:** Osher Jacobs (with debugging assistance from Claude/Anthropic AI)  
 **Date:** February 2026
+
 
 ## Purpose
 
