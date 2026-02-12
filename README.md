@@ -1,5 +1,5 @@
 # OFFSECSTUFF
-CPTS-OSCP-CAPE-OTHER
+
 # Active Directory Security Research
 
 Documentation of ADCS exploitation, Kerberos attack chains, and Windows evasion techniques validated in lab environments.
