@@ -47,6 +47,9 @@ openssl pkcs12 -in cert.pfx -nokeys -clcerts | \
 
 Tool output ≠ ground truth. When auth fails, inspect the artifact.
 
+<img width="800" height="374" alt="image" src="https://github.com/user-attachments/assets/6b04fb1c-4fb7-4ed8-8c43-996f0cf6d32e" />
+
+
 ---
 
 **Tags:** #ActiveDirectory #CertificateServices #ADCS #PenetrationTesting #InfoSec
