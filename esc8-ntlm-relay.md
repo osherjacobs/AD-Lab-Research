@@ -43,3 +43,6 @@ Disable web enrollment or enforce EPA/channel binding on the HTTP endpoint.
 ---
 
 **Verdict:** Elegant, devastating, surprisingly common in the wild.
+
+<img width="1176" height="319" alt="image" src="https://github.com/user-attachments/assets/4dff9496-d8ab-4e21-a6d6-8727cf306bec" />
+
