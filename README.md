@@ -4,6 +4,9 @@ CPTS-OSCP-CAPE-OTHER
 
 Documentation of ADCS exploitation, Kerberos attack chains, and Windows evasion techniques validated in lab environments.
 
+This repository documents controlled offensive security research conducted in enterprise-modeled lab environments.
+Emphasis is placed on attack path realism, defensive visibility, and control failure analysis rather than tool usage.
+
 **Focus areas:**
 - Certificate Services abuse (ESC1-16)
 - Kerberos delegation attacks
