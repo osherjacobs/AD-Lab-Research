@@ -309,7 +309,7 @@ AMSI's automatic deobfuscation capabilities are far more sophisticated than comm
 - Target script: https://github.com/andreisss/Ghosting-AMSI
 - Obfuscation tool: https://github.com/TaurusOmar/psobf
 - Microsoft AMSI documentation: https://docs.microsoft.com/en-us/windows/win32/amsi/
-- Related LinkedIn post: [AMSI Ate My Obfuscation Homework](https://www.linkedin.com/in/osherjacobs/)
+- Related LinkedIn post: [AMSI Ate My Obfuscation Homework](https://www.linkedin.com/feed/update/urn:li:activity:7427833122894991361/)
 
 ---
 
