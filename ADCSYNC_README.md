@@ -193,7 +193,8 @@ If you identify additional defects or improvements:
 - **JPG0mez** — Original ADCSync tool and concept  
 - **Claude (Anthropic)** — Debugging assistance and code analysis  
 - **Will Schroeder & Lee Christensen** — ESC research (Certified Pre-Owned)  
-- **Oliver Lyak** — Certipy development  
+- **Oliver Lyak** — Certipy development
+
 
 
 ---
