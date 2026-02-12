@@ -11,7 +11,7 @@ Documentation of real-world AMSI bypass attempts using various obfuscation techn
 
 ## Executive Summary
 
-Tested 5 progressive obfuscation levels plus manual encoding techniques against AMSI. **All attempts failed.** Key finding: AMSI automatically reverses common obfuscation methods (string concatenation, encoding, compression) and scans the deobfuscated payload in real-time.
+Tested 5 progressive obfuscation levels plus manual encoding techniques against AMSI. **All attempts failed.** Key finding: AMSI automatically reverses common obfuscation methods (string concatenation, encoding, compression) and scans the deobfuscated payload in real-time. Things have move on in the last few years it would seem.....
 
 ---
 
