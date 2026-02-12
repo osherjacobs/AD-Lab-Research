@@ -33,6 +33,9 @@ Tools break, detections improve, techniques age out. Understanding *why* somethi
 
 It's at times like this when you "get made" that you can really appreciate why we really might need a new hoover max extract pressure pro model 60...
 
+<img width="628" height="606" alt="image" src="https://github.com/user-attachments/assets/c01ad561-66a6-4e68-a55c-334a9bbb8c3b" />
+
+
 ## Main message
 
 Superfluous to say but if you're defending ADCS and not alerting on Event 4887 with SAN/subject mismatch — you're blind.
