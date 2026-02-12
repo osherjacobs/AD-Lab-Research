@@ -1,6 +1,6 @@
 # Windows Evasion Techniques - Comprehensive Reference
 
-**HTB Academy | Windows Evasion Module | Top 0.04% Achievement**
+**HTB Academy | Windows Evasion Module (Hard) |
 
 > **Note:** Sanitized for public documentation. Covers techniques that bypassed fully patched Windows 11 Enterprise with all security features enabled.
 
