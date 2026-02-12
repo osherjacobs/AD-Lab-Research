@@ -1,18 +1,28 @@
-Active Directory Certificate Services ships secure by default from Microsoft.
+**Active Directory Certificate Services ships secure by default from Microsoft.**  
 Yes, really.
-The ESC1–ESC16 vulnerabilities that keep showing up in pentest reports and red-team playbooks?
-They’re not Microsoft bugs.
-They’re change-management failures.
-Think of it this way:
-ADCS is the house Microsoft built with strong locks and thick walls.
-The ESC series are the vampires waiting outside.
-They don’t break in.
-Someone inside opens the window for them — usually with a well-meaning but poorly reviewed template change, unchecked enrollment rights, or a “just make it work” override.
-I love diving into Certipy, PowerShell one-liners, and hunting misconfigs as much as the next person (probably more).
-But the uncomfortable truth is:
-The real root cause almost never lives in the terminal.
-It lives in the change process, the approval gates, the documentation that nobody reads, and the “we’ll fix it in prod” mentality.
-Secure by design means very little if your change management is “design by chaos”.
+
+The ESC1–ESC16 vulnerabilities that keep popping up in pentest reports and red-team write-ups?  
+They’re **not** Microsoft bugs.  
+They’re **change-management failures**.
+
+Picture this:  
+
+ADCS is the fortress Microsoft hands you — strong locks, thick walls, solid design.  
+The ESC series? They’re the vampires circling outside.  
+
+They don’t smash windows.  
+Someone inside **opens the window** for them — usually with a rushed template tweak, unchecked enrollment rights, or a classic “just make it work” override.
+
+I love getting hands-on with Certipy, PowerShell one-liners, and hunting misconfigs as much as anyone (probably more).  
+But the hard truth is:
+
+The real failure almost never lives in the terminal.  
+It lives in the change process, the approval gates, the documentation no one reads, and the “we’ll fix it in prod” culture.
+
+Secure by design means almost nothing if your change management is “design by chaos”.
+
 Let’s stop pretending the tool is broken when the process is what’s bleeding.
-What’s your organization’s strongest (or weakest) control around ADCS template changes right now?
+
+What’s the strongest (or weakest) control your organization has around ADCS template changes right now?
+
 #ActiveDirectory #ADCS #PKI #Cybersecurity #PrivilegeEscalation #ChangeManagement
