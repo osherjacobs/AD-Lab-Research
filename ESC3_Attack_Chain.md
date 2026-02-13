@@ -481,6 +481,5 @@ THEN Alert: Potential certificate-based compromise
 **Purple team conclusion:** ESC3 demonstrates why enrollment agent privileges require strict access controls and approval workflows.
 
 <img width="1105" height="762" alt="image" src="https://github.com/user-attachments/assets/0450018b-3dab-477e-ac19-b524a55ecb32" />
-
 <img width="630" height="762" alt="image" src="https://github.com/user-attachments/assets/e23d74a5-7120-4086-b256-0d90cd9c39df" />
 
