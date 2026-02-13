@@ -479,3 +479,6 @@ THEN Alert: Potential certificate-based compromise
 **Attack completed:** 2026-02-13
 **Detection assessment:** Highly visible (requester/subject mismatch)
 **Purple team conclusion:** ESC3 demonstrates why enrollment agent privileges require strict access controls and approval workflows.
+
+<img width="1105" height="762" alt="image" src="https://github.com/user-attachments/assets/0450018b-3dab-477e-ac19-b524a55ecb32" />
+
