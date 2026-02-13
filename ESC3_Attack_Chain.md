@@ -1,4 +1,4 @@
-# ESC3: Enrollment Agent Abuse - Complete Attack Chain
+# ESC3: Enrollment Agent Abuse - Complete Attack Chain - Including Lab construction / misconfig
 
 ## Attack Overview
 
