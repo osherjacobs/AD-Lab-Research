@@ -21,7 +21,7 @@ Complete walkthrough of exploiting DACL permissions via AddMembers rights in Act
 
 ### Enumeration
 
-**Identify pedro's rights over TestGroup using BloodHound:**
+**Identify users rights over TestGroup using BloodHound:**
 
 ```bash
 # Collect AD data
@@ -44,7 +44,7 @@ python3 examples/dacledit.py -principal lowpriv -target 'TestGroup' -dc-ip 10.10
 
 ### Exploitation
 
-**Add pedro to TestGroup:**
+**Add users to TestGroup:**
 
 ```bash
 # GenericWrite allows using net (not Self-Membership restricted)
@@ -78,7 +78,7 @@ cat flag.txt
 
 ### Enumeration
 
-**Identify pedro's rights over Backup Operators:**
+**Identify users's rights over Backup Operators:**
 
 ```bash
 # Using dacledit.py
