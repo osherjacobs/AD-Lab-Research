@@ -78,7 +78,7 @@ cat flag.txt
 
 ### Enumeration
 
-**Identify pedro's rights over Backup Operators:**
+**Identify lowpriv users rights over Backup Operators:**
 
 ```bash
 # Using dacledit.py
