@@ -1,6 +1,6 @@
 # DACL Attack Detection Lab — Full Walkthrough
 
-**Environment:** Windows Server 2016 (lab2019.local) + Kali Linux  
+**Environment:** Windows Server 2019 (lab2019.local) + Kali Linux  
 **Scenario:** GenericWrite misconfiguration → targeted Kerberoasting  
 **Goal:** Build the attack, collect telemetry, define detection rules
 
