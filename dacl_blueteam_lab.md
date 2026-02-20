@@ -320,3 +320,5 @@ The 7-second gap between SPN write and ticket request is definitive. Legitimate 
 - Use Protected Users security group for sensitive accounts — prevents Kerberos delegation and RC4 downgrade
 - Enable fine-grained password policies for service accounts — long random passwords make Kerberoasted hashes uncrackable in practice
 - Alert on 4769 events requesting RC4 tickets (`TicketEncryptionType = 0x17`) for accounts that don't normally have SPNs
+
+<img width="814" height="742" alt="daclblueteam" src="https://github.com/user-attachments/assets/a33961b5-07c9-4911-9012-b354804a5147" />
