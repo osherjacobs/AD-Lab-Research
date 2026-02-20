@@ -322,3 +322,6 @@ The 7-second gap between SPN write and ticket request is definitive. Legitimate 
 - Alert on 4769 events requesting RC4 tickets (`TicketEncryptionType = 0x17`) for accounts that don't normally have SPNs
 
 <img width="814" height="742" alt="daclblueteam" src="https://github.com/user-attachments/assets/a33961b5-07c9-4911-9012-b354804a5147" />
+<img width="861" height="477" alt="Bloodhound" src="https://github.com/user-attachments/assets/1adb68f3-e30e-4ee9-a335-25acca99a5a9" />
+
+
