@@ -232,3 +232,7 @@ TGT request for `CTO_BRO` with Pre-Auth Type 16 (certificate-based). `Certificat
 - Add high-value accounts (C-suite, service accounts) to the Protected Users group — prevents NTLM and forces Kerberos AES
 - Audit the Managers → WriteOwner → CTO_BRO ACE — this misconfiguration is the root cause. Run BloodHound regularly to detect excessive DACL permissions
 - Implement a tiered admin model: delegated rights should never reach sensitive user objects via flat group membership
+
+<img width="1803" height="388" alt="2026-02-22_11-37" src="https://github.com/user-attachments/assets/afee64d1-acd6-4f23-a79b-d661dc777f91" />
+
+
