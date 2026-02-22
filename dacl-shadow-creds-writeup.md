@@ -234,5 +234,8 @@ TGT request for `CTO_BRO` with Pre-Auth Type 16 (certificate-based). `Certificat
 - Implement a tiered admin model: delegated rights should never reach sensitive user objects via flat group membership
 
 <img width="1803" height="388" alt="2026-02-22_11-37" src="https://github.com/user-attachments/assets/afee64d1-acd6-4f23-a79b-d661dc777f91" />
+<img width="1839" height="793" alt="2026-02-22_11-38" src="https://github.com/user-attachments/assets/3aff6648-90da-43ff-a4f6-acead1f0fd11" />
+
+
 
 
